@@ -1,5 +1,5 @@
 NAME = philo
-SRC = 
+SRC = main.c utils.c cleanup.c simulation.c
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -I./includes/
 
