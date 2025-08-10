@@ -1,24 +1,22 @@
 NAME = philo
 SRC = main.c utils.c cleanup.c simulation.c
+OBJ = $(SRC:.c=.o)
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -I./includes/
+CFLAGS = -Wall -Wextra -Werror
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
 	$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
 
-$(OBJ_DIR)/%.o: srcs/%.c includes/philo.h
-	@mkdir -p $(OBJ_DIR)
+%.o: %.c philo.h
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -rf $(OBJ_DIR)
-	rm -rf $(BONUS_OBJ_DIR)
+	rm -f $(OBJ)
 
 fclean: clean
 	rm -f $(NAME)
-	rm -f $(BONUS_NAME)
 
 re:
 	$(MAKE) fclean
