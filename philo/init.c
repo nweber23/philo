@@ -6,7 +6,7 @@
 /*   By: nweber <nweber@student.42Heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 10:07:30 by nweber            #+#    #+#             */
-/*   Updated: 2025/08/11 10:19:35 by nweber           ###   ########.fr       */
+/*   Updated: 2025/08/11 10:42:00 by nweber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,5 +57,24 @@ static int	init_mutexes(t_data *data)
 	if (pthread_mutex_init(&data->data, NULL) != 0)
 		return (printf("Error initializing data mutex\n"), \
 		pthread_mutex_destroy(&data->print_mutex), free(data->forks), 0);
+	return (1);
+}
+
+int	init_data(int argc, char **argv, t_data *data)
+{
+	data->philo_amount = ft_atoi(argv[1]);
+	data->time_to_die = ft_atoi(argv[2]);
+	data->time_to_eat = ft_atoi(argv[3]);
+	data->time_to_sleep = ft_atoi(argv[4]);
+	if (argc == 6)
+		data->meal_amount = ft_atoi(argv[5]);
+	else
+		data->meal_amount = -1;
+	data->end = 0;
+	data->start_time = get_time();
+	if (!init_mutexes(data))
+		return (0);
+	if (!init_philos(data))
+		return (cleanup(data), 0);
 	return (1);
 }

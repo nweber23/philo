@@ -6,7 +6,7 @@
 /*   By: nweber <nweber@student.42Heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/10 20:27:12 by nweber            #+#    #+#             */
-/*   Updated: 2025/08/11 10:19:59 by nweber           ###   ########.fr       */
+/*   Updated: 2025/08/11 10:31:14 by nweber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	main(int argc, char **argv)
 	if (!parse_arg(argc, argv, &data))
 		return (printf("Error\n"), 1);
 	memset(&data, 0, sizeof(t_data));
-	if (!init_data(&data))
+	if (!init_data(argc, argv, &data))
 		return (printf("Init Error\n"), cleanup(&data), 1);
 	if (!create_threads(&data))
 		return (printf("Start Error\n"), cleanup(&data), 1);

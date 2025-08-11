@@ -6,7 +6,7 @@
 /*   By: nweber <nweber@student.42Heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/10 19:52:13 by nweber            #+#    #+#             */
-/*   Updated: 2025/08/11 10:07:24 by nweber           ###   ########.fr       */
+/*   Updated: 2025/08/11 10:29:45 by nweber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,9 @@ typedef struct s_philo
 	pthread_mutex_t	left_fork;
 	pthread_mutex_t	right_fork;
 }					t_philo;
+
+// Init
+int	init_data(int argc, char **argv, t_data *data);
 
 // Cleanup
 int		join_threads(t_data *data);
