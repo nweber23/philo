@@ -6,7 +6,7 @@
 /*   By: nweber <nweber@student.42Heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/10 20:27:12 by nweber            #+#    #+#             */
-/*   Updated: 2025/08/11 09:30:57 by nweber           ###   ########.fr       */
+/*   Updated: 2025/08/11 10:19:59 by nweber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ static int	parse_arg(int argc, char **argv, t_data *data)
 	if (argc == 6 && !check_positives(argv[5]))
 		return (0);
 	return (1);
-
 }
 
 int	main(int argc, char **argv)
