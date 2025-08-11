@@ -6,7 +6,7 @@
 /*   By: nweber <nweber@student.42Heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/10 20:27:12 by nweber            #+#    #+#             */
-/*   Updated: 2025/08/10 20:58:20 by nweber           ###   ########.fr       */
+/*   Updated: 2025/08/11 09:30:57 by nweber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static int	check_positives(char *str)
 	return (1);
 }
 
-static int	parse_arg(int argc, char **argv)
+static int	parse_arg(int argc, char **argv, t_data *data)
 {
 	if (argc != 5 && argc != 6)
 	{
@@ -41,7 +41,7 @@ static int	parse_arg(int argc, char **argv)
 		return (0);
 	}
 	if (!check_positives(argv[1]) || !check_positives(argv[2])
-		|| !check_positives(argv[3]) || !check_positives[4])
+		|| !check_positives(argv[3]) || !check_positives(argv[4]))
 		return (0);
 	if (argc == 6 && !check_positives(argv[5]))
 		return (0);
