@@ -6,7 +6,7 @@
 /*   By: nweber <nweber@student.42Heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/10 19:52:13 by nweber            #+#    #+#             */
-/*   Updated: 2025/08/11 09:48:36 by nweber           ###   ########.fr       */
+/*   Updated: 2025/08/11 10:04:46 by nweber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,15 +43,21 @@ typedef struct s_philo
 	int				id;
 	int				meals_eaten;
 	long			time_since_meal;
+	t_data			*data;
 	pthread_t		thread;
 	pthread_mutex_t	left_fork;
 	pthread_mutex_t	right_fork;
 }					t_philo;
 
+// Cleanup
+int		join_threads(t_data *data);
+void	cleanup(t_data *data);
+
 // Utils
 int		ft_atoi(const char *str);
 long	get_time(void);
-int		join_threads(t_data *data);
-void	cleanup(t_data *data);
+
+void	print_status(t_philo *philo, const char *status);
+
 
 #endif

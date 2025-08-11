@@ -6,7 +6,7 @@
 /*   By: nweber <nweber@student.42Heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/10 20:32:03 by nweber            #+#    #+#             */
-/*   Updated: 2025/08/11 09:48:28 by nweber           ###   ########.fr       */
+/*   Updated: 2025/08/11 10:05:03 by nweber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,53 +45,17 @@ long	get_time(void)
 	return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
 }
 
-int	join_threads(t_data *data)
+void	print_status(t_philo *philo, const char *status)
 {
-	int	i;
+	long	time;
 
-	i = 0;
-	while (i < data->philo_amount)
+	pthread_mutex_lock(&philo->data->print_mutex);
+	pthread_mutex_lock(&philo->data->data);
+	if(!philo->data->end)
 	{
-		if (pthread_join(data->philos[i].thread, NULL) != 0)
-		{
-			printf("Error joining thread %d\n", i);
-			return (0);
-		}
-		i++;
+		time = get_time() - philo->data->start_time;
+		printf("%ld %d %s\n", time, philo->id + 1, status);
 	}
-	if (pthread_join(data->monitor_thread, NULL) != 0)
-	{
-		printf("Error joining monitor thread\n");
-		return (0);
-	}
-	return (1);
-}
-
-static void	destroy_mutexes(t_data *data)
-{
-	int	i;
-
-	if (data->forks)
-	{
-		i = 0;
-		while (i < data->philo_amount)
-		{
-			pthread_mutex_destroy(&data->forks[i]);
-			i++;
-		}
-		free(data->forks);
-	}
-	pthread_mutex_destroy(&data->print_mutex);
-	pthread_mutex_destroy(&data->data);
-}
-
-void	cleanup(t_data *data)
-{
-	if (data->philos)
-	{
-		free(data->philos);
-		data->philos = NULL;
-	}
-	destroy_mutexes(data);
-	data->end = 1;
+	pthread_mutex_unlock(&philo->data->data);
+	pthread_mutex_unlock(&philo->data->print_mutex);
 }
