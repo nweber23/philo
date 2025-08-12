@@ -1,6 +1,7 @@
 NAME = philo
 SRC = main.c utils.c simulation.c cleanup.c init.c actions.c
-OBJ = $(SRC:.c=.o)
+OBJ_DIR = obj
+OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -pthread
 
@@ -9,11 +10,14 @@ all: $(NAME)
 $(NAME): $(OBJ)
 	$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
 
-%.o: %.c philo.h
+$(OBJ_DIR)/%.o: %.c philo.h | $(OBJ_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
+$(OBJ_DIR):
+	mkdir -p $(OBJ_DIR)
+
 clean:
-	rm -f $(OBJ)
+	rm -rf $(OBJ_DIR)
 
 fclean: clean
 	rm -f $(NAME)
