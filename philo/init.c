@@ -6,7 +6,7 @@
 /*   By: nweber <nweber@student.42Heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 10:07:30 by nweber            #+#    #+#             */
-/*   Updated: 2025/08/11 10:42:00 by nweber           ###   ########.fr       */
+/*   Updated: 2025/08/12 12:46:41 by nweber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ static int	init_philos(t_data *data)
 		data->philos[i].meals_eaten = 0;
 		data->philos[i].time_since_meal = data->start_time;
 		data->philos[i].data = data;
-		data->philos[i].left_fork = data->forks[i];
-		data->philos[i].right_fork = data->forks[(i + 1) % data->philo_amount];
+		data->philos[i].left_fork = &data->forks[i];
+		data->philos[i].right_fork = &data->forks[(i + 1) % data->philo_amount];
 		i++;
 	}
 	return (1);

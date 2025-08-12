@@ -6,7 +6,7 @@
 /*   By: nweber <nweber@student.42Heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/10 20:27:12 by nweber            #+#    #+#             */
-/*   Updated: 2025/08/12 10:59:46 by nweber           ###   ########.fr       */
+/*   Updated: 2025/08/12 12:42:33 by nweber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,5 +61,5 @@ int	main(int argc, char **argv)
 		return (printf("Start Error\n"), cleanup(&data), 1);
 	join_threads(&data);
 	cleanup(&data);
-	return (0);
+	exit(EXIT_SUCCESS);
 }
