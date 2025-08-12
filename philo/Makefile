@@ -1,5 +1,5 @@
 NAME = philo
-SRC = main.c utils.c simulation.c cleanup.c init.c action.c
+SRC = main.c utils.c simulation.c cleanup.c init.c actions.c
 OBJ = $(SRC:.c=.o)
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -pthread

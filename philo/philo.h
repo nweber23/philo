@@ -6,7 +6,7 @@
 /*   By: nweber <nweber@student.42Heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/10 19:52:13 by nweber            #+#    #+#             */
-/*   Updated: 2025/08/12 10:05:46 by nweber           ###   ########.fr       */
+/*   Updated: 2025/08/12 11:03:26 by nweber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,12 @@ void	print_status(t_philo *philo, const char *status);
 // Actions
 void	take_forks(t_philo *philo);
 void	eat_and_sleep(t_philo *philo);
+void	*philo_routine(void *arg);
 
 // Simulation
+void	*monitoring(void *arg);
+int		check_death(t_data *data);
+int		check_meal_amount(t_data *data);
+int		create_threads(t_data *data);
 
 #endif
