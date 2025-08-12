@@ -6,7 +6,7 @@
 /*   By: nweber <nweber@student.42Heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/10 20:32:03 by nweber            #+#    #+#             */
-/*   Updated: 2025/08/11 10:19:49 by nweber           ###   ########.fr       */
+/*   Updated: 2025/08/12 09:59:56 by nweber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,15 @@ long	get_time(void)
 
 	gettimeofday(&tv, NULL);
 	return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
+}
+
+void	ft_usleep(long time)
+{
+	long	start_time;
+
+	start_time = get_time();
+	while (get_time() - start_time < time)
+		usleep(100);
 }
 
 void	print_status(t_philo *philo, const char *status)

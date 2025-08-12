@@ -1,0 +1,45 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   actions.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nweber <nweber@student.42Heilbronn.de>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/08/12 09:52:56 by nweber            #+#    #+#             */
+/*   Updated: 2025/08/12 10:05:33 by nweber           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "philo.h"
+
+void	take_forks(t_philo *philo)
+{
+	if (philo->id % 2 == 0)
+	{
+		pthread_mutex_lock(&philo->left_fork);
+		print_status(philo, "has taken a fork");
+		pthread_mutex_lock(&philo->right_fork);
+		print_status(philo, "has taken a fork");
+	}
+	else
+	{
+		pthread_mutex_lock(&philo->right_fork);
+		print_status(philo, "has taken a fork");
+		pthread_mutex_lock(&philo->left_fork);
+		print_status(philo, "has taken a fork");
+	}
+}
+
+void	eat_and_sleep(t_philo *philo)
+{
+	print_status(philo, "is eating");
+	pthread_mutex_lock(&philo->data->data);
+	philo->time_since_meal = get_time();
+	philo->meals_eaten++;
+	pthread_mutex_unlock(&philo->data->data);
+	ft_usleep(philo->data->time_to_eat);
+	pthread_mutex_unlock(&philo->left_fork);
+	pthread_mutex_unlock(&philo->right_fork);
+	print_status(philo, "is sleeping");
+	ft_usleep(philo->data->time_to_sleep);
+}

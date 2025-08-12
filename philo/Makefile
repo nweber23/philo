@@ -1,8 +1,8 @@
 NAME = philo
-SRC = main.c utils.c simulation.c cleanup.c init.c
+SRC = main.c utils.c simulation.c cleanup.c init.c action.c
 OBJ = $(SRC:.c=.o)
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -pthread
 
 all: $(NAME)
 

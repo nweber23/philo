@@ -6,7 +6,7 @@
 /*   By: nweber <nweber@student.42Heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/10 19:52:13 by nweber            #+#    #+#             */
-/*   Updated: 2025/08/11 10:29:45 by nweber           ###   ########.fr       */
+/*   Updated: 2025/08/12 10:05:46 by nweber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ typedef struct s_philo
 }					t_philo;
 
 // Init
-int	init_data(int argc, char **argv, t_data *data);
+int		init_data(int argc, char **argv, t_data *data);
 
 // Cleanup
 int		join_threads(t_data *data);
@@ -59,6 +59,13 @@ void	cleanup(t_data *data);
 // Utils
 int		ft_atoi(const char *str);
 long	get_time(void);
+void	ft_usleep(long time);
 void	print_status(t_philo *philo, const char *status);
+
+// Actions
+void	take_forks(t_philo *philo);
+void	eat_and_sleep(t_philo *philo);
+
+// Simulation
 
 #endif
