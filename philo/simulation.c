@@ -6,7 +6,7 @@
 /*   By: nweber <nweber@student.42Heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/15 11:48:51 by nweber            #+#    #+#             */
-/*   Updated: 2025/08/15 11:48:55 by nweber           ###   ########.fr       */
+/*   Updated: 2025/08/15 12:15:49 by nweber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	*monitoring(void *arg)
 	{
 		if (check_death(data) || check_meal_amount(data))
 			break ;
-		usleep(200);
+		usleep(1000);
 	}
 	return (NULL);
 }

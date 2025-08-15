@@ -6,7 +6,7 @@
 /*   By: nweber <nweber@student.42Heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/15 11:49:39 by nweber            #+#    #+#             */
-/*   Updated: 2025/08/15 11:49:51 by nweber           ###   ########.fr       */
+/*   Updated: 2025/08/15 12:17:42 by nweber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,11 @@ void	take_forks(t_philo *philo)
 
 void	eat_and_sleep(t_philo *philo)
 {
-	print_status(philo, "is eating");
 	pthread_mutex_lock(&philo->data->data);
 	philo->time_since_meal = get_time();
 	philo->meals_eaten++;
 	pthread_mutex_unlock(&philo->data->data);
+	print_status(philo, "is eating");
 	ft_usleep(philo->data->time_to_eat);
 	pthread_mutex_unlock(philo->left_fork);
 	pthread_mutex_unlock(philo->right_fork);
@@ -59,6 +59,8 @@ void	*philo_routine(void *arg)
 	philo = (t_philo *)arg;
 	if (philo->id % 2 == 0)
 		ft_usleep(philo->data->time_to_eat / 2);
+	else
+		ft_usleep(philo->data->time_to_eat / 4);
 	while (2)
 	{
 		pthread_mutex_lock(&philo->data->data);
@@ -71,7 +73,7 @@ void	*philo_routine(void *arg)
 		take_forks(philo);
 		eat_and_sleep(philo);
 		print_status(philo, "is thinking");
-		usleep(500);
+		usleep(100);
 	}
 	return (NULL);
 }
