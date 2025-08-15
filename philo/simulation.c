@@ -6,7 +6,7 @@
 /*   By: nweber <nweber@student.42Heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/10 20:32:50 by nweber            #+#    #+#             */
-/*   Updated: 2025/08/12 12:45:30 by nweber           ###   ########.fr       */
+/*   Updated: 2025/08/15 11:23:16 by nweber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ int	create_threads(t_data *data)
 		if (pthread_create(&data->philos[i].thread, NULL, \
 			philo_routine, &data->philos[i]) != 0)
 			return (0);
-			i++;
+		i++;
 	}
 	if (pthread_create(&data->monitor_thread, NULL, \
 		monitoring, data) != 0)
