@@ -6,7 +6,7 @@
 /*   By: nweber <nweber@student.42Heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/15 11:49:39 by nweber            #+#    #+#             */
-/*   Updated: 2025/08/15 12:17:42 by nweber           ###   ########.fr       */
+/*   Updated: 2025/08/18 09:34:29 by nweber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,6 @@
 
 void	take_forks(t_philo *philo)
 {
-	if (philo->data->philo_amount == 1)
-	{
-		pthread_mutex_lock(philo->left_fork);
-		print_status(philo, "has taken a fork");
-		ft_usleep(philo->data->time_to_die);
-		pthread_mutex_unlock(philo->left_fork);
-		return ;
-	}
 	if (philo->id % 2 == 0)
 	{
 		pthread_mutex_lock(philo->left_fork);

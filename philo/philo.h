@@ -6,7 +6,7 @@
 /*   By: nweber <nweber@student.42Heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/10 19:52:13 by nweber            #+#    #+#             */
-/*   Updated: 2025/08/12 12:46:16 by nweber           ###   ########.fr       */
+/*   Updated: 2025/08/18 09:38:44 by nweber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ int		ft_atoi(const char *str);
 long	get_time(void);
 void	ft_usleep(long time);
 void	print_status(t_philo *philo, const char *status);
+int		philo_amount_checker(t_philo *philo);
 
 // Actions
 void	take_forks(t_philo *philo);

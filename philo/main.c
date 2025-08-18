@@ -6,7 +6,7 @@
 /*   By: nweber <nweber@student.42Heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/10 20:27:12 by nweber            #+#    #+#             */
-/*   Updated: 2025/08/12 12:42:33 by nweber           ###   ########.fr       */
+/*   Updated: 2025/08/18 09:42:41 by nweber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ int	main(int argc, char **argv)
 	memset(&data, 0, sizeof(t_data));
 	if (!init_data(argc, argv, &data))
 		return (printf("Init Error\n"), cleanup(&data), 1);
+	if (!philo_amount_checker(data.philos))
+		return (cleanup(&data), 0);
 	if (!create_threads(&data))
 		return (printf("Start Error\n"), cleanup(&data), 1);
 	join_threads(&data);
