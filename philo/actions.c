@@ -6,7 +6,7 @@
 /*   By: nweber <nweber@student.42Heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/15 11:49:39 by nweber            #+#    #+#             */
-/*   Updated: 2025/08/18 10:37:40 by nweber           ###   ########.fr       */
+/*   Updated: 2025/08/18 11:05:27 by nweber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	*philo_routine(void *arg)
 		take_forks(philo);
 		eat_and_sleep(philo);
 		print_status(philo, "is thinking");
-		usleep(10);
+		ft_usleep((philo->data->time_to_eat - philo->data->time_to_sleep) / 2 + 2);
 	}
 	return (NULL);
 }
