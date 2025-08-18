@@ -12,6 +12,7 @@ all: $(NAME)
 $(NAME): $(OBJ)
 	$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
 	@echo "\033[1;31m"
+	@echo "                                      "
 	@echo " ██▓███   ██░ ██  ██▓ ██▓     ▒█████  "
 	@echo "▓██░  ██▒▓██░ ██▒▓██▒▓██▒    ▒██▒  ██▒"
 	@echo "▓██░ ██▓▒▒██▀▀██░▒██▒▒██░    ▒██░  ██▒"
@@ -21,6 +22,8 @@ $(NAME): $(OBJ)
 	@echo "░▒ ░      ▒ ░▒░ ░ ▒ ░░ ░ ▒  ░  ░ ▒ ▒░ "
 	@echo "░░        ░  ░░ ░ ▒ ░  ░ ░   ░ ░ ░ ▒  "
 	@echo "          ░  ░  ░ ░      ░  ░    ░ ░  "
+	@echo "                                      "
+	@echo "         COMPILATION FINISHED         "
 	@echo "\033[0m"
 
 $(OBJ_DIR)/%.o: %.c philo.h | $(OBJ_DIR)
