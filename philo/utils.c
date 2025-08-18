@@ -6,7 +6,7 @@
 /*   By: nweber <nweber@student.42Heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/10 20:32:03 by nweber            #+#    #+#             */
-/*   Updated: 2025/08/18 10:38:43 by nweber           ###   ########.fr       */
+/*   Updated: 2025/08/18 15:21:08 by nweber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,13 +59,13 @@ void	print_status(t_philo *philo, const char *status)
 	long	time;
 	int		should_print;
 
-	time = get_time() - philo->data->start_time;
 	pthread_mutex_lock(&philo->data->data);
 	should_print = !philo->data->end;
 	pthread_mutex_unlock(&philo->data->data);
 	if (!should_print)
 		return ;
 	pthread_mutex_lock(&philo->data->print_mutex);
+	time = get_time() - philo->data->start_time;
 	printf("%ld %d %s\n", time, philo->id + 1, status);
 	pthread_mutex_unlock(&philo->data->print_mutex);
 }
