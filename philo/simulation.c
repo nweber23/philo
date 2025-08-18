@@ -6,7 +6,7 @@
 /*   By: nweber <nweber@student.42Heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/15 11:48:51 by nweber            #+#    #+#             */
-/*   Updated: 2025/08/18 10:43:15 by nweber           ###   ########.fr       */
+/*   Updated: 2025/08/18 13:58:17 by nweber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	check_death(t_data *data)
 	{
 		pthread_mutex_lock(&data->data);
 		time_since_last_meal = current_time - data->philos[i].time_since_meal;
-		if (time_since_last_meal > data->time_to_die)
+		if (time_since_last_meal >= data->time_to_die)
 		{
 			pthread_mutex_lock(&data->print_mutex);
 			printf("%ld %d died\n", current_time - data->start_time, \

@@ -5,10 +5,23 @@ OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -pthread
 
+.SILENT:
+
 all: $(NAME)
 
 $(NAME): $(OBJ)
 	$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
+	@echo "\033[1;31m"
+	@echo " ██▓███   ██░ ██  ██▓ ██▓     ▒█████  "
+	@echo "▓██░  ██▒▓██░ ██▒▓██▒▓██▒    ▒██▒  ██▒"
+	@echo "▓██░ ██▓▒▒██▀▀██░▒██▒▒██░    ▒██░  ██▒"
+	@echo "▒██▄█▓▒ ▒░▓█ ░██ ░██░▒██░    ▒██   ██░"
+	@echo "▒██▒ ░  ░░▓█▒░██▓░██░░██████▒░ ████▓▒░"
+	@echo "▒▓▒░ ░  ░ ▒ ░░▒░▒░▓  ░ ▒░▓  ░░ ▒░▒░▒░ "
+	@echo "░▒ ░      ▒ ░▒░ ░ ▒ ░░ ░ ▒  ░  ░ ▒ ▒░ "
+	@echo "░░        ░  ░░ ░ ▒ ░  ░ ░   ░ ░ ░ ▒  "
+	@echo "          ░  ░  ░ ░      ░  ░    ░ ░  "
+	@echo "\033[0m"
 
 $(OBJ_DIR)/%.o: %.c philo.h | $(OBJ_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@
