@@ -6,7 +6,7 @@
 /*   By: nweber <nweber@student.42Heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/10 20:32:03 by nweber            #+#    #+#             */
-/*   Updated: 2025/08/18 15:21:08 by nweber           ###   ########.fr       */
+/*   Updated: 2025/08/20 20:09:40 by nweber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,19 @@ long	get_time(void)
 	return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
 }
 
-void	ft_usleep(long time)
+void	ft_usleep(long time, t_philo *philo)
 {
 	long	start_time;
 
 	start_time = get_time();
 	while (get_time() - start_time < time)
+	{
+		if (philo->data->end)
+		{
+			break ;
+		}
 		usleep(1000);
+	}
 }
 
 void	print_status(t_philo *philo, const char *status)
@@ -65,6 +71,11 @@ void	print_status(t_philo *philo, const char *status)
 	if (!should_print)
 		return ;
 	pthread_mutex_lock(&philo->data->print_mutex);
+	if (philo->data->end)
+	{
+		pthread_mutex_unlock(&philo->data->print_mutex);
+		return ;
+	}
 	time = get_time() - philo->data->start_time;
 	printf("%ld %d %s\n", time, philo->id + 1, status);
 	pthread_mutex_unlock(&philo->data->print_mutex);
@@ -78,7 +89,7 @@ int	philo_amount_checker(t_philo *philo)
 	{
 		pthread_mutex_lock(philo->left_fork);
 		print_status(philo, "has taken a fork");
-		ft_usleep(philo->data->time_to_die);
+		ft_usleep(philo->data->time_to_die, philo);
 		pthread_mutex_unlock(philo->left_fork);
 		current_time = get_time();
 		pthread_mutex_lock(&philo->data->print_mutex);

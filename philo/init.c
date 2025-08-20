@@ -6,7 +6,7 @@
 /*   By: nweber <nweber@student.42Heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 10:07:30 by nweber            #+#    #+#             */
-/*   Updated: 2025/08/12 12:46:41 by nweber           ###   ########.fr       */
+/*   Updated: 2025/08/20 20:00:38 by nweber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,6 @@ int	init_data(int argc, char **argv, t_data *data)
 	if (!init_mutexes(data))
 		return (0);
 	if (!init_philos(data))
-		return (cleanup(data), 0);
+		return (0);
 	return (1);
 }

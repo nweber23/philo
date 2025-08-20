@@ -6,7 +6,7 @@
 /*   By: nweber <nweber@student.42Heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/10 20:27:12 by nweber            #+#    #+#             */
-/*   Updated: 2025/08/18 09:42:41 by nweber           ###   ########.fr       */
+/*   Updated: 2025/08/20 17:00:27 by nweber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int	check_positives(char *str)
 		i++;
 	}
 	num = ft_atoi(str);
-	if (num < 0)
+	if (num <= 0)
 		return (0);
 	return (1);
 }
