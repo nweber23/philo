@@ -6,7 +6,7 @@
 /*   By: nweber <nweber@student.42Heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/10 20:32:03 by nweber            #+#    #+#             */
-/*   Updated: 2025/08/20 20:09:40 by nweber           ###   ########.fr       */
+/*   Updated: 2025/08/20 21:11:04 by nweber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,15 +48,17 @@ long	get_time(void)
 void	ft_usleep(long time, t_philo *philo)
 {
 	long	start_time;
+	int		should_break;
 
 	start_time = get_time();
 	while (get_time() - start_time < time)
 	{
-		if (philo->data->end)
-		{
+		pthread_mutex_lock(&philo->data->data);
+		should_break = philo->data->end;
+		pthread_mutex_unlock(&philo->data->data);
+		if (should_break)
 			break ;
-		}
-		usleep(1000);
+		usleep(500);
 	}
 }
 
