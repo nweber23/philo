@@ -6,7 +6,7 @@
 /*   By: nweber <nweber@student.42Heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/10 20:32:03 by nweber            #+#    #+#             */
-/*   Updated: 2025/08/20 21:11:04 by nweber           ###   ########.fr       */
+/*   Updated: 2025/08/23 19:39:08 by nweber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,15 +72,17 @@ void	print_status(t_philo *philo, const char *status)
 	pthread_mutex_unlock(&philo->data->data);
 	if (!should_print)
 		return ;
-	pthread_mutex_lock(&philo->data->print_mutex);
+	pthread_mutex_lock(&philo->data->data);
 	if (philo->data->end)
 	{
-		pthread_mutex_unlock(&philo->data->print_mutex);
+		pthread_mutex_unlock(&philo->data->data);
 		return ;
 	}
+	pthread_mutex_lock(&philo->data->print_mutex);
 	time = get_time() - philo->data->start_time;
 	printf("%ld %d %s\n", time, philo->id + 1, status);
 	pthread_mutex_unlock(&philo->data->print_mutex);
+	pthread_mutex_unlock(&philo->data->data);
 }
 
 int	philo_amount_checker(t_philo *philo)
