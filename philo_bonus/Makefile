@@ -1,11 +1,10 @@
+MAKEFLAGS += --silent
 NAME = philo_bonus
 SRC = main.c utils.c simulation.c cleanup.c init.c actions.c
 OBJ_DIR = obj
 OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -pthread
-
-.SILENT:
 
 all: $(NAME)
 
