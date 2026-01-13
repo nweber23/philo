@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_bonus.c                                       :+:      :+:    :+:   */
+/*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nweber <nweber@student.42Heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/20 20:00:00 by nweber            #+#    #+#             */
-/*   Updated: 2025/08/20 20:00:00 by nweber           ###   ########.fr       */
+/*   Created: 2026/01/13 13:22:22 by nweber            #+#    #+#             */
+/*   Updated: 2026/01/13 13:22:25 by nweber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,29 @@ static void	unlink_semaphores(void)
 	sem_unlink(SEM_PRINT);
 	sem_unlink(SEM_MEAL);
 	sem_unlink(SEM_DEAD);
+	sem_unlink(SEM_STOP);
+}
+
+static int	init_sems_part2(t_data *data)
+{
+	data->dead = sem_open(SEM_DEAD, O_CREAT, 0644, 0);
+	if (data->dead == SEM_FAILED)
+	{
+		sem_close(data->forks);
+		sem_close(data->print);
+		sem_close(data->meal);
+		return (0);
+	}
+	data->stop = sem_open(SEM_STOP, O_CREAT, 0644, 1);
+	if (data->stop == SEM_FAILED)
+	{
+		sem_close(data->forks);
+		sem_close(data->print);
+		sem_close(data->meal);
+		sem_close(data->dead);
+		return (0);
+	}
+	return (1);
 }
 
 int	init_semaphores(t_data *data)
@@ -59,15 +82,7 @@ int	init_semaphores(t_data *data)
 		sem_close(data->print);
 		return (0);
 	}
-	data->dead = sem_open(SEM_DEAD, O_CREAT, 0644, 0);
-	if (data->dead == SEM_FAILED)
-	{
-		sem_close(data->forks);
-		sem_close(data->print);
-		sem_close(data->meal);
-		return (0);
-	}
-	return (1);
+	return (init_sems_part2(data));
 }
 
 int	init_data(int argc, char **argv, t_data *data)

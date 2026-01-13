@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo_bonus.h                                      :+:      :+:    :+:   */
+/*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nweber <nweber@student.42Heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/20 20:00:00 by nweber            #+#    #+#             */
-/*   Updated: 2025/08/20 20:00:00 by nweber           ###   ########.fr       */
+/*   Created: 2026/01/13 13:22:06 by nweber            #+#    #+#             */
+/*   Updated: 2026/01/13 13:22:09 by nweber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 # define SEM_PRINT "/philo_print"
 # define SEM_MEAL "/philo_meal"
 # define SEM_DEAD "/philo_dead"
+# define SEM_STOP "/philo_stop"
 
 typedef struct s_philo	t_philo;
 
@@ -46,6 +47,7 @@ typedef struct s_data
 	sem_t		*print;
 	sem_t		*meal;
 	sem_t		*dead;
+	sem_t		*stop;
 }				t_data;
 
 typedef struct s_philo

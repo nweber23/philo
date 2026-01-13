@@ -1,6 +1,5 @@
 NAME = philo_bonus
-SRC = main_bonus.c utils_bonus.c simulation_bonus.c cleanup_bonus.c \
-	  init_bonus.c actions_bonus.c
+SRC = main.c utils.c simulation.c cleanup.c init.c actions.c
 OBJ_DIR = obj
 OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
 CC = cc
@@ -27,7 +26,7 @@ $(NAME): $(OBJ)
 	@echo "       BONUS COMPILATION FINISHED     "
 	@echo "\033[0m"
 
-$(OBJ_DIR)/%.o: %.c philo_bonus.h | $(OBJ_DIR)
+$(OBJ_DIR)/%.o: %.c philo.h | $(OBJ_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 $(OBJ_DIR):
