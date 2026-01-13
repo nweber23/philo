@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILO_BONUS_H
-# define PHILO_BONUS_H
+#ifndef PHILO_H
+# define PHILO_H
 
 # include <stdio.h>
 # include <stdlib.h>

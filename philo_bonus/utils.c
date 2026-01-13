@@ -6,11 +6,11 @@
 /*   By: nweber <nweber@student.42Heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 13:21:55 by nweber            #+#    #+#             */
-/*   Updated: 2026/01/13 13:22:01 by nweber           ###   ########.fr       */
+/*   Updated: 2026/01/13 13:25:00 by nweber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo_bonus.h"
+#include "philo.h"
 
 int	ft_atoi(const char *str)
 {
@@ -52,7 +52,7 @@ void	ft_usleep(long time, t_philo *philo)
 	(void)philo;
 	start_time = get_time();
 	while (get_time() - start_time < time)
-		usleep(500);
+		usleep(100);
 }
 
 void	print_status(t_philo *philo, const char *status)
@@ -60,7 +60,11 @@ void	print_status(t_philo *philo, const char *status)
 	long	time;
 
 	sem_wait(philo->data->print);
-	time = get_time() - philo->data->start_time;
-	printf("%ld %d %s\n", time, philo->id + 1, status);
+	if (sem_trywait(philo->data->stop) == 0)
+	{
+		sem_post(philo->data->stop);
+		time = get_time() - philo->data->start_time;
+		printf("%ld %d %s\n", time, philo->id + 1, status);
+	}
 	sem_post(philo->data->print);
 }

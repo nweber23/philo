@@ -6,11 +6,11 @@
 /*   By: nweber <nweber@student.42Heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 13:22:30 by nweber            #+#    #+#             */
-/*   Updated: 2026/01/13 13:22:33 by nweber           ###   ########.fr       */
+/*   Updated: 2026/01/13 13:24:36 by nweber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo_bonus.h"
+#include "philo.h"
 
 void	kill_processes(t_data *data)
 {
@@ -35,10 +35,13 @@ void	cleanup_semaphores(t_data *data)
 		sem_close(data->meal);
 	if (data->dead)
 		sem_close(data->dead);
+	if (data->stop)
+		sem_close(data->stop);
 	sem_unlink(SEM_FORKS);
 	sem_unlink(SEM_PRINT);
 	sem_unlink(SEM_MEAL);
 	sem_unlink(SEM_DEAD);
+	sem_unlink(SEM_STOP);
 }
 
 void	cleanup(t_data *data)

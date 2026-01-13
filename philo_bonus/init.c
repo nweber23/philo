@@ -6,11 +6,11 @@
 /*   By: nweber <nweber@student.42Heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 13:22:22 by nweber            #+#    #+#             */
-/*   Updated: 2026/01/13 13:22:25 by nweber           ###   ########.fr       */
+/*   Updated: 2026/01/13 13:24:40 by nweber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo_bonus.h"
+#include "philo.h"
 
 int	init_philos(t_data *data)
 {

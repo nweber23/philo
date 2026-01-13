@@ -6,11 +6,11 @@
 /*   By: nweber <nweber@student.42Heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 13:22:37 by nweber            #+#    #+#             */
-/*   Updated: 2026/01/13 13:22:42 by nweber           ###   ########.fr       */
+/*   Updated: 2026/01/13 13:24:31 by nweber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo_bonus.h"
+#include "philo.h"
 
 void	take_forks(t_philo *philo)
 {

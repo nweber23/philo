@@ -6,11 +6,20 @@
 /*   By: nweber <nweber@student.42Heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 13:21:45 by nweber            #+#    #+#             */
-/*   Updated: 2026/01/13 13:21:48 by nweber           ###   ########.fr       */
+/*   Updated: 2026/01/13 13:24:55 by nweber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo_bonus.h"
+#include "philo.h"
+
+static void	philo_died(t_philo *philo, long current_time)
+{
+	sem_wait(philo->data->stop);
+	sem_wait(philo->data->print);
+	printf("%ld %d died\n", current_time - philo->data->start_time,
+		philo->id + 1);
+	exit(1);
+}
 
 void	*monitor_death(void *arg)
 {
@@ -21,20 +30,13 @@ void	*monitor_death(void *arg)
 	philo = (t_philo *)arg;
 	while (1)
 	{
+		usleep(500);
 		sem_wait(philo->data->meal);
 		current_time = get_time();
 		time_since_last_meal = current_time - philo->time_since_meal;
-		if (time_since_last_meal >= philo->data->time_to_die)
-		{
-			sem_wait(philo->data->print);
-			printf("%ld %d died\n", current_time - philo->data->start_time,
-				philo->id + 1);
-			sem_post(philo->data->dead);
-			sem_post(philo->data->meal);
-			exit(1);
-		}
 		sem_post(philo->data->meal);
-		usleep(1000);
+		if (time_since_last_meal >= philo->data->time_to_die)
+			philo_died(philo, current_time);
 	}
 	return (NULL);
 }
