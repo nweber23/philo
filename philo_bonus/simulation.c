@@ -1,0 +1,80 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   simulation_bonus.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nweber <nweber@student.42Heilbronn.de>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/08/20 20:00:00 by nweber            #+#    #+#             */
+/*   Updated: 2025/08/20 20:00:00 by nweber           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "philo_bonus.h"
+
+void	*monitor_death(void *arg)
+{
+	t_philo	*philo;
+	long	current_time;
+	long	time_since_last_meal;
+
+	philo = (t_philo *)arg;
+	while (1)
+	{
+		sem_wait(philo->data->meal);
+		current_time = get_time();
+		time_since_last_meal = current_time - philo->time_since_meal;
+		if (time_since_last_meal >= philo->data->time_to_die)
+		{
+			sem_wait(philo->data->print);
+			printf("%ld %d died\n", current_time - philo->data->start_time,
+				philo->id + 1);
+			sem_post(philo->data->dead);
+			sem_post(philo->data->meal);
+			exit(1);
+		}
+		sem_post(philo->data->meal);
+		usleep(1000);
+	}
+	return (NULL);
+}
+
+int	start_simulation(t_data *data)
+{
+	int		i;
+	pid_t	pid;
+
+	i = 0;
+	while (i < data->philo_amount)
+	{
+		pid = fork();
+		if (pid == -1)
+		{
+			kill_processes(data);
+			return (0);
+		}
+		if (pid == 0)
+			philo_routine(&data->philos[i]);
+		data->pids[i] = pid;
+		i++;
+	}
+	return (1);
+}
+
+void	wait_processes(t_data *data)
+{
+	int	i;
+	int	status;
+
+	i = 0;
+	while (i < data->philo_amount)
+	{
+		waitpid(-1, &status, 0);
+		if (WIFEXITED(status) && WEXITSTATUS(status) == 1)
+		{
+			kill_processes(data);
+			break ;
+		}
+		i++;
+	}
+}
