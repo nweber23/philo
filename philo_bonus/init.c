@@ -6,7 +6,7 @@
 /*   By: nweber <nweber@student.42Heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 13:22:22 by nweber            #+#    #+#             */
-/*   Updated: 2026/01/13 13:24:40 by nweber           ###   ########.fr       */
+/*   Updated: 2026/01/16 13:11:26 by nweber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ int	init_philos(t_data *data)
 		data->philos[i].meals_eaten = 0;
 		data->philos[i].time_since_meal = data->start_time;
 		data->philos[i].data = data;
+		data->philos[i].routine = 0;
+		data->philos[i].monitor = 0;
 		data->pids[i] = 0;
 		i++;
 	}

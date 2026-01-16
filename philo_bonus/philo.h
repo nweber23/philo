@@ -6,7 +6,7 @@
 /*   By: nweber <nweber@student.42Heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 13:22:06 by nweber            #+#    #+#             */
-/*   Updated: 2026/01/13 13:22:09 by nweber           ###   ########.fr       */
+/*   Updated: 2026/01/16 13:11:28 by nweber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ typedef struct s_philo
 	int			meals_eaten;
 	long		time_since_meal;
 	t_data		*data;
+	pthread_t	routine;
 	pthread_t	monitor;
 }				t_philo;
 
@@ -65,9 +66,11 @@ int		init_semaphores(t_data *data);
 int		init_philos(t_data *data);
 
 // Cleanup
+void	close_semaphores(t_data *data);
 void	cleanup_semaphores(t_data *data);
 void	cleanup(t_data *data);
 void	kill_processes(t_data *data);
+void	child_cleanup(t_data *data);
 
 // Utils
 int		ft_atoi(const char *str);

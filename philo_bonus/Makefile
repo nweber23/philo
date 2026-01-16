@@ -1,6 +1,6 @@
 MAKEFLAGS += --silent
 NAME = philo_bonus
-SRC = main.c utils.c simulation.c cleanup.c init.c actions.c
+SRC = main.c utils.c simulation.c cleanup.c init.c actions.c forks.c
 OBJ_DIR = obj
 OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
 CC = cc
