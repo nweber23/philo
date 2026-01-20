@@ -14,6 +14,7 @@
 
 static void	philo_died(t_philo *philo, long current_time)
 {
+	sem_wait(philo->data->stop);
 	sem_wait(philo->data->meal);
 	if (philo->data->end)
 	{

@@ -58,11 +58,10 @@ void	print_status(t_philo *philo, const char *status)
 {
 	long	time;
 
+	sem_wait(philo->data->stop);
 	sem_wait(philo->data->print);
-	if (!philo->data->end)
-	{
-		time = get_time() - philo->data->start_time;
-		printf("%ld %d %s\n", time, philo->id + 1, status);
-	}
+	time = get_time() - philo->data->start_time;
+	printf("%ld %d %s\n", time, philo->id + 1, status);
 	sem_post(philo->data->print);
+	sem_post(philo->data->stop);
 }
