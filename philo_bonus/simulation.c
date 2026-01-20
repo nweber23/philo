@@ -14,9 +14,14 @@
 
 static void	philo_died(t_philo *philo, long current_time)
 {
+	sem_wait(philo->data->meal);
 	if (philo->data->end)
+	{
+		sem_post(philo->data->meal);
 		return ;
+	}
 	philo->data->end = 1;
+	sem_post(philo->data->meal);
 	sem_wait(philo->data->print);
 	printf("%ld %d died\n", current_time - philo->data->start_time,
 		philo->id + 1);
@@ -30,17 +35,19 @@ void	*monitor_death(void *arg)
 	t_philo	*philo;
 	long	current_time;
 	long	time_since_last_meal;
+	int		should_exit;
 
 	philo = (t_philo *)arg;
 	while (1)
 	{
-		if (philo->data->end)
-			return (NULL);
 		usleep(500);
 		sem_wait(philo->data->meal);
+		should_exit = philo->data->end;
 		current_time = get_time();
 		time_since_last_meal = current_time - philo->time_since_meal;
 		sem_post(philo->data->meal);
+		if (should_exit)
+			return (NULL);
 		if (time_since_last_meal >= philo->data->time_to_die)
 		{
 			philo_died(philo, current_time);
